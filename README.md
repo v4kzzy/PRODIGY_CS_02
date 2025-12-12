@@ -13,7 +13,6 @@
 It features a modern Dark Mode GUI and includes a built-in **Shannon Entropy Calculator** to mathematically prove the randomness (and security) of the encrypted output.
 
  
-*(Add a screenshot of your tool here)*
 
 ---
 
