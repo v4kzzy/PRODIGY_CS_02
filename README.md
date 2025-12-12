@@ -1,6 +1,6 @@
 # PixelLock - Image Encryption Tool
 
-A secure tool to encrypt images using "Labubu" (text-based) keys.
+A secure tool to encrypt images using "v4kzy" (text-based) keys.
 
 ## Features
 - **Modern GUI:** Dark mode interface.
