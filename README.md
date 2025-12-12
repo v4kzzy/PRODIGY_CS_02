@@ -4,7 +4,7 @@ A secure tool to encrypt images using "v4kzy" (text-based) keys.
 
 ## Features
 - **Modern GUI:** Dark mode interface.
-- **Easy Keys:** Use names (like "labubu") instead of numbers.
+- **Easy Keys:** Use names (like "v4kzy") instead of numbers.
 - **Dual Security:** Uses XOR math + Pixel Swapping.
 
 ## How to use
