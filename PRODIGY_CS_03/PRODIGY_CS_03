@@ -1,0 +1,114 @@
+import ttkbootstrap as tb
+from ttkbootstrap.constants import *
+import re
+
+def check_strength(password):
+    """
+    Analyzes the password and returns a score (0-100) and a label.
+    """
+    score = 0
+    feedback = []
+
+    # 1. Length Check
+    if len(password) == 0:
+        return 0, "Empty", "secondary"
+    
+    if len(password) >= 8:
+        score += 20
+    else:
+        feedback.append("Too short")
+
+    # 2. Uppercase Check
+    if re.search(r"[A-Z]", password):
+        score += 20
+    else:
+        feedback.append("No uppercase")
+
+    # 3. Lowercase Check
+    if re.search(r"[a-z]", password):
+        score += 20
+    else:
+        feedback.append("No lowercase")
+
+    # 4. Number Check
+    if re.search(r"\d", password):
+        score += 20
+    else:
+        feedback.append("No numbers")
+
+    # 5. Special Character Check
+    if re.search(r"[!@#$%^&*(),.?\":{}|<>]", password):
+        score += 20
+    else:
+        feedback.append("No special chars")
+
+    # Determine Status
+    if score < 40:
+        status = "Weak"
+        color = "danger"  # Red
+    elif score < 80:
+        status = "Moderate"
+        color = "warning" # Orange
+    else:
+        status = "Strong"
+        color = "success" # Green
+
+    return score, status, color
+
+def on_password_change(event):
+    """
+    Called every time the user types a character.
+    """
+    password = entry_pass.get()
+    score, status, color = check_strength(password)
+
+    # Update the Meter (Gauge)
+    meter.configure(amountused=score, bootstyle=color)
+    
+    # Update the Text Label
+    lbl_status.config(text=f"Status: {status}", bootstyle=color)
+
+# --- GUI SETUP ---
+app = tb.Window(themename="cyborg")
+app.title("Password Strength Tool")
+app.geometry("400x450")
+
+lbl_title = tb.Label(app, text="Password Checker", font=("Helvetica", 18, "bold"), bootstyle="info")
+lbl_title.pack(pady=20)
+
+# The Meter (Visual Gauge)
+meter = tb.Meter(
+    app,
+    bootstyle="danger",
+    subtext="Strength",
+    interactive=False,
+    textright="%",
+    metertype="semi",  # Semi-circle gauge
+    stripethickness=10,
+    amountused=0
+)
+meter.pack(pady=20)
+
+# Input Field
+entry_pass = tb.Entry(app, show="*", font=("Helvetica", 12))
+entry_pass.pack(pady=10, padx=50, fill=X)
+
+# Bind the typing event to our function
+entry_pass.bind("<KeyRelease>", on_password_change)
+
+# Status Label
+lbl_status = tb.Label(app, text="Status: Empty", font=("Helvetica", 12))
+lbl_status.pack(pady=10)
+
+# Checkbox to show/hide password
+var_show = tb.BooleanVar()
+def toggle_show():
+    if var_show.get():
+        entry_pass.config(show="")
+    else:
+        entry_pass.config(show="*")
+
+chk_show = tb.Checkbutton(app, text="Show Password", variable=var_show, command=toggle_show, bootstyle="round-toggle")
+chk_show.pack(pady=10)
+
+app.mainloop()
