@@ -1,4 +1,4 @@
-# 🛡️ Aegis // Professional Image Encryption Tool
+# 🛡️ Professional Image Encryption Tool
 
 > **A secure, lossless image encryption application using AES-256 (CTR Mode) with real-time entropy analysis.**
 
