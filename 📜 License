@@ -1,0 +1,5 @@
+### **One final task for you:**
+To make this look perfect on GitHub or your portfolio:
+1.  **Take a Screenshot:** Run your app, encrypt a file so the "Entropy Score" shows in the log, and take a screenshot of the window.
+2.  **Save it:** Name it `screenshot.png` in your folder.
+3.  **Update the README:** Replace `` with `![Screenshot](screenshot.png)`.
